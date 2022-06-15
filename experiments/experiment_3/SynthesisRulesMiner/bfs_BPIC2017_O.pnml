@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="42301647-b154-4c22-933c-df3f07cdc5cc"/>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="5cf570ae-3f82-423f-b1a6-a5d523aa8168"/>
+      </transition>
+      <arc id="2358071830224" source="p1" target="end_tau"/>
+      <arc id="2358071829744" source="end_tau" target="sink"/>
+      <arc id="2358082923152" source="start_tau" target="p0"/>
+      <arc id="2358071889200" source="End" target="p1"/>
+      <arc id="2358082905808" source="source" target="start_tau"/>
+      <arc id="2358082921136" source="p0" target="End"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

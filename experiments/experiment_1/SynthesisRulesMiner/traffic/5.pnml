@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <transition id="Send Appeal to Prefecture">
+        <name>
+          <text>Send Appeal to Prefecture</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="e3dbc007-8442-48e3-9db9-4ecbf10bd842"/>
+      </transition>
+      <transition id="Send for Credit Collection">
+        <name>
+          <text>Send for Credit Collection</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="49f6d3d0-9825-4e2f-93c4-f015f944baac"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="60615e86-1877-4caf-a903-eb2362bdd990"/>
+      </transition>
+      <transition id="tau_2">
+        <name>
+          <text>tau_2</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="421f7009-2c67-4fd9-b31c-54fcf6a9b6ed"/>
+      </transition>
+      <transition id="tau_4">
+        <name>
+          <text>tau_4</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="13639b1c-dc51-415c-98e8-1705c2c4bcf9"/>
+      </transition>
+      <transition id="Payment">
+        <name>
+          <text>Payment</text>
+        </name>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="Send Fine">
+        <name>
+          <text>Send Fine</text>
+        </name>
+      </transition>
+      <arc id="2358090526976" source="tau_4" target="p3"/>
+      <arc id="2358090681600" source="p3" target="Send Fine"/>
+      <arc id="2358090682128" source="Send Appeal to Prefecture" target="p4"/>
+      <arc id="2358090681504" source="tau_2" target="p4"/>
+      <arc id="2358090527264" source="Payment" target="p2"/>
+      <arc id="2358090681888" source="p4" target="End"/>
+      <arc id="2358090678432" source="p1" target="end_tau"/>
+      <arc id="2358090530096" source="start_tau" target="p2"/>
+      <arc id="2358090681648" source="Send for Credit Collection" target="p4"/>
+      <arc id="2358090679728" source="end_tau" target="sink"/>
+      <arc id="2358090527552" source="Send Fine" target="p5"/>
+      <arc id="2358090527936" source="p2" target="tau_1"/>
+      <arc id="2358090681408" source="p3" target="tau_2"/>
+      <arc id="2358090682176" source="p5" target="Send for Credit Collection"/>
+      <arc id="2358090527312" source="p3" target="Payment"/>
+      <arc id="2358090681936" source="End" target="p1"/>
+      <arc id="2358090527072" source="p5" target="tau_4"/>
+      <arc id="2358090530144" source="source" target="start_tau"/>
+      <arc id="2358090682224" source="p5" target="Send Appeal to Prefecture"/>
+      <arc id="2358090527984" source="tau_1" target="p3"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

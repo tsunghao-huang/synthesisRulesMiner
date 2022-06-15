@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="A_Cancelled">
+        <name>
+          <text>A_Cancelled</text>
+        </name>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="A_Accepted">
+        <name>
+          <text>A_Accepted</text>
+        </name>
+      </transition>
+      <transition id="A_Incomplete">
+        <name>
+          <text>A_Incomplete</text>
+        </name>
+      </transition>
+      <transition id="A_Submitted">
+        <name>
+          <text>A_Submitted</text>
+        </name>
+      </transition>
+      <transition id="A_Concept">
+        <name>
+          <text>A_Concept</text>
+        </name>
+      </transition>
+      <transition id="tau_4">
+        <name>
+          <text>tau_4</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="38e4a0f0-54d5-4655-b94f-e1f089b610d6"/>
+      </transition>
+      <transition id="tau_3">
+        <name>
+          <text>tau_3</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="6667a60c-b8e4-43bf-bc15-9d22ff1629e7"/>
+      </transition>
+      <transition id="A_Pending">
+        <name>
+          <text>A_Pending</text>
+        </name>
+      </transition>
+      <transition id="A_Validating">
+        <name>
+          <text>A_Validating</text>
+        </name>
+      </transition>
+      <transition id="A_Complete">
+        <name>
+          <text>A_Complete</text>
+        </name>
+      </transition>
+      <transition id="A_Denied">
+        <name>
+          <text>A_Denied</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="fa4ee95e-3143-470e-823a-abb2e8d0a447"/>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="a17879c6-5e94-4f72-8960-52ef1efdfe8c"/>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="f63268b0-142c-4671-82e6-1a3ce7cab7ec"/>
+      </transition>
+      <transition id="tau_5">
+        <name>
+          <text>tau_5</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="894f870b-54ad-4a1c-ac39-d3a923fc9bf6"/>
+      </transition>
+      <arc id="2358092046592" source="p3" target="A_Pending"/>
+      <arc id="2358092032896" source="A_Cancelled" target="p0"/>
+      <arc id="2358092048896" source="source" target="start_tau"/>
+      <arc id="2358092049040" source="A_Concept" target="p6"/>
+      <arc id="2358092047504" source="p4" target="tau_3"/>
+      <arc id="2358092116752" source="A_Denied" target="p0"/>
+      <arc id="2358092047888" source="A_Validating" target="p3"/>
+      <arc id="2358092116512" source="end_tau" target="sink"/>
+      <arc id="2358092119200" source="p2" target="tau_0"/>
+      <arc id="2358092047264" source="tau_4" target="p3"/>
+      <arc id="2358092046496" source="tau_3" target="p2"/>
+      <arc id="2358092118432" source="p0" target="End"/>
+      <arc id="2358092117424" source="p2" target="A_Denied"/>
+      <arc id="2358092050096" source="p5" target="A_Complete"/>
+      <arc id="2358092049328" source="A_Submitted" target="p7"/>
+      <arc id="2358092048944" source="p8" target="A_Submitted"/>
+      <arc id="2358092047552" source="p2" target="A_Validating"/>
+      <arc id="2358092046784" source="A_Pending" target="p0"/>
+      <arc id="2358092048320" source="p8" target="tau_5"/>
+      <arc id="2358092047936" source="A_Incomplete" target="p4"/>
+      <arc id="2358092116416" source="p1" target="end_tau"/>
+      <arc id="2358092049472" source="p6" target="A_Accepted"/>
+      <arc id="2358092048992" source="p7" target="A_Concept"/>
+      <arc id="2358092048224" source="tau_5" target="p7"/>
+      <arc id="2358092047456" source="p3" target="A_Incomplete"/>
+      <arc id="2358092050144" source="A_Accepted" target="p5"/>
+      <arc id="2358092049760" source="start_tau" target="p8"/>
+      <arc id="2358092117088" source="End" target="p1"/>
+      <arc id="2358092047216" source="p4" target="tau_4"/>
+      <arc id="2358092049136" source="A_Complete" target="p2"/>
+      <arc id="2358092031600" source="p2" target="A_Cancelled"/>
+      <arc id="2358092118384" source="tau_0" target="p0"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

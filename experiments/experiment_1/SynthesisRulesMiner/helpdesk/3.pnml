@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <transition id="Take in charge ticket">
+        <name>
+          <text>Take in charge ticket</text>
+        </name>
+      </transition>
+      <transition id="Closed">
+        <name>
+          <text>Closed</text>
+        </name>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="638ea5d0-a98f-4e07-9e54-dc914c0a1ea9"/>
+      </transition>
+      <transition id="Resolve ticket">
+        <name>
+          <text>Resolve ticket</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="ccb809ab-96be-423d-97b2-f281ac773984"/>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="18d89c48-054b-4a75-be5e-2bb316594abc"/>
+      </transition>
+      <arc id="2358091227872" source="Take in charge ticket" target="p3"/>
+      <arc id="2358091227200" source="source" target="start_tau"/>
+      <arc id="2358091037856" source="Closed" target="p1"/>
+      <arc id="2358091228256" source="p3" target="tau_1"/>
+      <arc id="2358091228352" source="p4" target="Resolve ticket"/>
+      <arc id="2358091228160" source="tau_1" target="p4"/>
+      <arc id="2358091228304" source="p0" target="Closed"/>
+      <arc id="2358091230032" source="p4" target="Take in charge ticket"/>
+      <arc id="2358091228496" source="p1" target="end_tau"/>
+      <arc id="2358091230800" source="end_tau" target="sink"/>
+      <arc id="2358091229648" source="Resolve ticket" target="p0"/>
+      <arc id="2358091229264" source="start_tau" target="p3"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

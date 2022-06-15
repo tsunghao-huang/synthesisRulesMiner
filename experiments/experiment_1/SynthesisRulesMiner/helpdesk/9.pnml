@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <transition id="Create SW anomaly">
+        <name>
+          <text>Create SW anomaly</text>
+        </name>
+      </transition>
+      <transition id="tau_2">
+        <name>
+          <text>tau_2</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="bf35844a-0a1c-4bdd-8df9-b902a32ecac7"/>
+      </transition>
+      <transition id="Resolve ticket">
+        <name>
+          <text>Resolve ticket</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="098a1432-6b20-4f4f-8b04-107e603e1fab"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="5327c4c6-5dcc-4b01-84e7-a8f9f51702fa"/>
+      </transition>
+      <transition id="Assign seriousness">
+        <name>
+          <text>Assign seriousness</text>
+        </name>
+      </transition>
+      <transition id="Closed">
+        <name>
+          <text>Closed</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="c51684ba-575f-46b4-a19a-61cd17181852"/>
+      </transition>
+      <transition id="tau_3">
+        <name>
+          <text>tau_3</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="ce18b7fe-a6ec-4482-b01f-191df87366d8"/>
+      </transition>
+      <transition id="Take in charge ticket">
+        <name>
+          <text>Take in charge ticket</text>
+        </name>
+      </transition>
+      <transition id="Start">
+        <name>
+          <text>Start</text>
+        </name>
+      </transition>
+      <transition id="Insert ticket">
+        <name>
+          <text>Insert ticket</text>
+        </name>
+      </transition>
+      <transition id="Require upgrade">
+        <name>
+          <text>Require upgrade</text>
+        </name>
+      </transition>
+      <transition id="Wait">
+        <name>
+          <text>Wait</text>
+        </name>
+      </transition>
+      <arc id="2358091215872" source="Wait" target="p4"/>
+      <arc id="2358092060032" source="tau_1" target="p4"/>
+      <arc id="2358091193360" source="Require upgrade" target="p3"/>
+      <arc id="2358091216400" source="Start" target="p9"/>
+      <arc id="2358091215632" source="Resolve ticket" target="p0"/>
+      <arc id="2358091215776" source="p3" target="Wait"/>
+      <arc id="2358091193504" source="Take in charge ticket" target="p5"/>
+      <arc id="2358091216160" source="p7" target="Assign seriousness"/>
+      <arc id="2358091216544" source="start_tau" target="p8"/>
+      <arc id="2358092061856" source="p3" target="tau_1"/>
+      <arc id="2358091190816" source="p4" target="Take in charge ticket"/>
+      <arc id="2358091192880" source="tau_2" target="p3"/>
+      <arc id="2358091215152" source="Insert ticket" target="p7"/>
+      <arc id="2358091191104" source="p9" target="tau_3"/>
+      <arc id="2358091214912" source="Assign seriousness" target="p3"/>
+      <arc id="2358091215296" source="p0" target="Closed"/>
+      <arc id="2358092058688" source="p1" target="end_tau"/>
+      <arc id="2358091192256" source="tau_3" target="p7"/>
+      <arc id="2358091193792" source="p5" target="Create SW anomaly"/>
+      <arc id="2358091193552" source="source" target="start_tau"/>
+      <arc id="2358092061904" source="end_tau" target="sink"/>
+      <arc id="2358091215056" source="p8" target="Start"/>
+      <arc id="2358091216592" source="p9" target="Insert ticket"/>
+      <arc id="2358091190768" source="p5" target="tau_2"/>
+      <arc id="2358091194224" source="Create SW anomaly" target="p6"/>
+      <arc id="2358091216112" source="p4" target="Resolve ticket"/>
+      <arc id="2358091191920" source="p6" target="Require upgrade"/>
+      <arc id="2358091217264" source="Closed" target="p1"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

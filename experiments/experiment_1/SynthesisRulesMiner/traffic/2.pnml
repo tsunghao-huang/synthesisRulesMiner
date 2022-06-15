@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="68c0bb37-b60c-4b49-85e4-e289f7002125"/>
+      </transition>
+      <transition id="Payment">
+        <name>
+          <text>Payment</text>
+        </name>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="4f72768c-3909-4570-95e8-3cc0e8e17067"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="5d59dfbc-9418-421d-bc32-5a69682a7684"/>
+      </transition>
+      <arc id="2358090822464" source="end_tau" target="sink"/>
+      <arc id="2358090822272" source="End" target="p1"/>
+      <arc id="2358090824384" source="p3" target="End"/>
+      <arc id="2358090822080" source="p2" target="tau_1"/>
+      <arc id="2358090822416" source="tau_1" target="p3"/>
+      <arc id="2358090823088" source="Payment" target="p2"/>
+      <arc id="2358090822032" source="start_tau" target="p2"/>
+      <arc id="2358090823184" source="p3" target="Payment"/>
+      <arc id="2358090822224" source="p1" target="end_tau"/>
+      <arc id="2358090822128" source="source" target="start_tau"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="tau_3">
+        <name>
+          <text>tau_3</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="0f5caa02-b8f0-4b8a-b4f2-9e32623a0c55"/>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="1a2b678a-b84c-41b0-85e7-3237aae4efbb"/>
+      </transition>
+      <transition id="A_Denied">
+        <name>
+          <text>A_Denied</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="628a2e12-944c-4039-a8de-a19361dee8e4"/>
+      </transition>
+      <transition id="tau_4">
+        <name>
+          <text>tau_4</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="97709e6c-98d0-49ac-9238-f41d1ceed3eb"/>
+      </transition>
+      <transition id="A_Cancelled">
+        <name>
+          <text>A_Cancelled</text>
+        </name>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="d740e16f-464e-4a63-9e78-36b83c50a7b9"/>
+      </transition>
+      <transition id="A_Pending">
+        <name>
+          <text>A_Pending</text>
+        </name>
+      </transition>
+      <transition id="A_Validating">
+        <name>
+          <text>A_Validating</text>
+        </name>
+      </transition>
+      <transition id="A_Incomplete">
+        <name>
+          <text>A_Incomplete</text>
+        </name>
+      </transition>
+      <arc id="2358092188160" source="A_Pending" target="p0"/>
+      <arc id="2358092188544" source="p2" target="A_Denied"/>
+      <arc id="2358092189456" source="source" target="start_tau"/>
+      <arc id="2358092189600" source="tau_4" target="p3"/>
+      <arc id="2358092188832" source="A_Validating" target="p3"/>
+      <arc id="2358092230960" source="p0" target="End"/>
+      <arc id="2358092188592" source="start_tau" target="p2"/>
+      <arc id="2358092187440" source="p2" target="A_Cancelled"/>
+      <arc id="2358092186288" source="tau_0" target="p0"/>
+      <arc id="2358092189360" source="p4" target="tau_3"/>
+      <arc id="2358092188736" source="A_Incomplete" target="p4"/>
+      <arc id="2358092189120" source="p4" target="tau_4"/>
+      <arc id="2358092189504" source="tau_3" target="p2"/>
+      <arc id="2358092185664" source="p2" target="tau_0"/>
+      <arc id="2358092187584" source="p3" target="A_Incomplete"/>
+      <arc id="2358092188496" source="A_Denied" target="p0"/>
+      <arc id="2358092230864" source="End" target="p1"/>
+      <arc id="2358092187344" source="A_Cancelled" target="p0"/>
+      <arc id="2358092231776" source="end_tau" target="sink"/>
+      <arc id="2358092187488" source="p2" target="A_Validating"/>
+      <arc id="2358092231392" source="p1" target="end_tau"/>
+      <arc id="2358092188400" source="p3" target="A_Pending"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

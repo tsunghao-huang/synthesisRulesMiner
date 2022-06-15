@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <transition id="CODE NOK">
+        <name>
+          <text>CODE NOK</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="150b1fdc-6e6c-42fd-95ce-19ae189f4043"/>
+      </transition>
+      <transition id="FIN">
+        <name>
+          <text>FIN</text>
+        </name>
+      </transition>
+      <transition id="tau_2">
+        <name>
+          <text>tau_2</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="cf3580c9-611f-4fa1-b707-a93504099f31"/>
+      </transition>
+      <transition id="BILLED">
+        <name>
+          <text>BILLED</text>
+        </name>
+      </transition>
+      <transition id="DELETE">
+        <name>
+          <text>DELETE</text>
+        </name>
+      </transition>
+      <transition id="NEW">
+        <name>
+          <text>NEW</text>
+        </name>
+      </transition>
+      <transition id="EMPTY">
+        <name>
+          <text>EMPTY</text>
+        </name>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="aa056b83-2c3d-4f7c-b1d6-80a4610f7e07"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="0a9cd85d-177a-450f-946c-548d47f30c69"/>
+      </transition>
+      <transition id="CHANGE DIAGN">
+        <name>
+          <text>CHANGE DIAGN</text>
+        </name>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="318166e1-7033-4faa-8a57-aa2bfa17ad2b"/>
+      </transition>
+      <transition id="CODE OK">
+        <name>
+          <text>CODE OK</text>
+        </name>
+      </transition>
+      <transition id="RELEASE">
+        <name>
+          <text>RELEASE</text>
+        </name>
+      </transition>
+      <arc id="2358090929920" source="p2" target="CHANGE DIAGN"/>
+      <arc id="2358090904576" source="p1" target="end_tau"/>
+      <arc id="2358090905728" source="p8" target="DELETE"/>
+      <arc id="2358090930448" source="tau_2" target="p8"/>
+      <arc id="2358090929296" source="start_tau" target="p3"/>
+      <arc id="2358090905104" source="DELETE" target="p0"/>
+      <arc id="2358090905872" source="End" target="p1"/>
+      <arc id="2358090905632" source="tau_0" target="p0"/>
+      <arc id="2358090907552" source="CODE OK" target="p4"/>
+      <arc id="2358090930592" source="p2" target="tau_2"/>
+      <arc id="2358090929824" source="NEW" target="p2"/>
+      <arc id="2358090907312" source="p6" target="CODE OK"/>
+      <arc id="2358090906544" source="p7" target="RELEASE"/>
+      <arc id="2358090930352" source="CHANGE DIAGN" target="p8"/>
+      <arc id="2358090928576" source="source" target="start_tau"/>
+      <arc id="2358090907072" source="p6" target="CODE NOK"/>
+      <arc id="2358090905152" source="p2" target="tau_0"/>
+      <arc id="2358090907456" source="tau_1" target="p4"/>
+      <arc id="2358090906688" source="EMPTY" target="p0"/>
+      <arc id="2358090904528" source="end_tau" target="sink"/>
+      <arc id="2358090906832" source="p5" target="EMPTY"/>
+      <arc id="2358090907216" source="CODE NOK" target="p5"/>
+      <arc id="2358090905680" source="p8" target="FIN"/>
+      <arc id="2358090907360" source="p5" target="tau_1"/>
+      <arc id="2358090906592" source="BILLED" target="p0"/>
+      <arc id="2358090905824" source="p0" target="End"/>
+      <arc id="2358090904672" source="FIN" target="p7"/>
+      <arc id="2358090929392" source="p3" target="NEW"/>
+      <arc id="2358090905584" source="p4" target="BILLED"/>
+      <arc id="2358090906736" source="RELEASE" target="p6"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

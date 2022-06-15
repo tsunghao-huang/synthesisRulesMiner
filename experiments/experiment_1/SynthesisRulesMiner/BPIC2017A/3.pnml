@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <transition id="A_Cancelled">
+        <name>
+          <text>A_Cancelled</text>
+        </name>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="b20a1517-72d1-45eb-9eb0-88d9d57d7f2c"/>
+      </transition>
+      <transition id="A_Pending">
+        <name>
+          <text>A_Pending</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="d233bc01-93c7-4f22-8f11-3aa06c537008"/>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="7a70bfd9-8665-4ff3-b569-cd671bfe217a"/>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <arc id="2358092023648" source="End" target="p1"/>
+      <arc id="2358092022496" source="p0" target="End"/>
+      <arc id="2358092022592" source="p1" target="end_tau"/>
+      <arc id="2358092025472" source="A_Cancelled" target="p0"/>
+      <arc id="2358092022208" source="end_tau" target="sink"/>
+      <arc id="2358092024512" source="start_tau" target="p2"/>
+      <arc id="2358092023984" source="A_Pending" target="p0"/>
+      <arc id="2358092023888" source="p2" target="A_Cancelled"/>
+      <arc id="2358092025328" source="p2" target="A_Pending"/>
+      <arc id="2358092023408" source="p2" target="tau_0"/>
+      <arc id="2358092024656" source="source" target="start_tau"/>
+      <arc id="2358092023504" source="tau_0" target="p0"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

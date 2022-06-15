@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <transition id="Resolve ticket">
+        <name>
+          <text>Resolve ticket</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="7c705000-57d7-4718-a711-59b72091b92f"/>
+      </transition>
+      <transition id="Closed">
+        <name>
+          <text>Closed</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="5d4a8747-6495-4c32-ad1b-ff104f1aa847"/>
+      </transition>
+      <arc id="2358091245600" source="Resolve ticket" target="p0"/>
+      <arc id="2358091245696" source="Closed" target="p1"/>
+      <arc id="2358091247520" source="start_tau" target="p2"/>
+      <arc id="2358091036224" source="end_tau" target="sink"/>
+      <arc id="2358091246176" source="source" target="start_tau"/>
+      <arc id="2358091246224" source="p0" target="Closed"/>
+      <arc id="2358091245456" source="p2" target="Resolve ticket"/>
+      <arc id="2358091036368" source="p1" target="end_tau"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

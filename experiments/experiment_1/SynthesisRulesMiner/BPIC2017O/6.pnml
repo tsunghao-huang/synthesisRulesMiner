@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="O_Refused">
+        <name>
+          <text>O_Refused</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="71301308-0a2c-4f3a-ad71-5944aa39d210"/>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="f8222a4d-bf1b-40eb-9e55-bc7f9fe3257b"/>
+      </transition>
+      <transition id="O_Accepted">
+        <name>
+          <text>O_Accepted</text>
+        </name>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="O_Sent (online only)">
+        <name>
+          <text>O_Sent (online only)</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="a33f9523-adb9-4363-98c0-e66bf0c6f106"/>
+      </transition>
+      <transition id="O_Cancelled">
+        <name>
+          <text>O_Cancelled</text>
+        </name>
+      </transition>
+      <transition id="O_Sent (mail and online)">
+        <name>
+          <text>O_Sent (mail and online)</text>
+        </name>
+      </transition>
+      <arc id="2358091922400" source="end_tau" target="sink"/>
+      <arc id="2358091921152" source="O_Refused" target="p0"/>
+      <arc id="2358091920672" source="O_Cancelled" target="p0"/>
+      <arc id="2358091923072" source="start_tau" target="p3"/>
+      <arc id="2358091921248" source="p2" target="O_Refused"/>
+      <arc id="2358091921536" source="p3" target="O_Sent (mail and online)"/>
+      <arc id="2358091922976" source="O_Accepted" target="p0"/>
+      <arc id="2358091920768" source="tau_0" target="p0"/>
+      <arc id="2358091921632" source="source" target="start_tau"/>
+      <arc id="2358091923360" source="p2" target="O_Accepted"/>
+      <arc id="2358091921488" source="O_Sent (mail and online)" target="p2"/>
+      <arc id="2358091923312" source="O_Sent (online only)" target="p2"/>
+      <arc id="2358091920048" source="p0" target="End"/>
+      <arc id="2358091922352" source="p1" target="end_tau"/>
+      <arc id="2358091922928" source="End" target="p1"/>
+      <arc id="2358091920816" source="p2" target="tau_0"/>
+      <arc id="2358091923216" source="p3" target="O_Sent (online only)"/>
+      <arc id="2358091921008" source="p2" target="O_Cancelled"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

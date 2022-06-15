@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <transition id="tau_2">
+        <name>
+          <text>tau_2</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="b072d148-1cdc-4903-b696-405ee9ae4bbe"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="c56dd54c-3076-41f3-9daf-08d0422fcaec"/>
+      </transition>
+      <transition id="Send for Credit Collection">
+        <name>
+          <text>Send for Credit Collection</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="662329e7-a392-4199-9878-bb8b2e434901"/>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="428c7b05-b793-471e-a7b4-e9a0a14381b1"/>
+      </transition>
+      <transition id="Payment">
+        <name>
+          <text>Payment</text>
+        </name>
+      </transition>
+      <arc id="2358090811232" source="End" target="p1"/>
+      <arc id="2358090800288" source="source" target="start_tau"/>
+      <arc id="2358090800672" source="p3" target="Payment"/>
+      <arc id="2358090801056" source="p2" target="tau_1"/>
+      <arc id="2358090799232" source="p3" target="tau_2"/>
+      <arc id="2358090798176" source="end_tau" target="sink"/>
+      <arc id="2358090800912" source="tau_1" target="p3"/>
+      <arc id="2358090798128" source="p1" target="end_tau"/>
+      <arc id="2358090800432" source="start_tau" target="p2"/>
+      <arc id="2358090801008" source="p3" target="Send for Credit Collection"/>
+      <arc id="2358090800144" source="p4" target="End"/>
+      <arc id="2358090800528" source="Send for Credit Collection" target="p4"/>
+      <arc id="2358090799184" source="tau_2" target="p4"/>
+      <arc id="2358090801104" source="Payment" target="p2"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

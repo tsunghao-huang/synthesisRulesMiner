@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <transition id="tau_2">
+        <name>
+          <text>tau_2</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="804145ef-6af9-4a8b-8bbe-f91bf073b22f"/>
+      </transition>
+      <transition id="tau_1">
+        <name>
+          <text>tau_1</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="9f706616-a154-4203-a964-bc1f04902a09"/>
+      </transition>
+      <transition id="Resolve ticket">
+        <name>
+          <text>Resolve ticket</text>
+        </name>
+      </transition>
+      <transition id="Closed">
+        <name>
+          <text>Closed</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="4ed3625d-384a-459c-a76f-561ee54c487a"/>
+      </transition>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="594c0a2d-fd67-4290-87b2-64dc2a7c19d6"/>
+      </transition>
+      <transition id="Wait">
+        <name>
+          <text>Wait</text>
+        </name>
+      </transition>
+      <transition id="Take in charge ticket">
+        <name>
+          <text>Take in charge ticket</text>
+        </name>
+      </transition>
+      <transition id="Require upgrade">
+        <name>
+          <text>Require upgrade</text>
+        </name>
+      </transition>
+      <arc id="2358091314080" source="p5" target="tau_2"/>
+      <arc id="2358091314848" source="Require upgrade" target="p3"/>
+      <arc id="2358091150528" source="p1" target="end_tau"/>
+      <arc id="2358091313600" source="p5" target="Require upgrade"/>
+      <arc id="2358091316288" source="source" target="start_tau"/>
+      <arc id="2358091316960" source="p4" target="Resolve ticket"/>
+      <arc id="2358091316192" source="tau_2" target="p3"/>
+      <arc id="2358091313696" source="p0" target="Closed"/>
+      <arc id="2358091317152" source="start_tau" target="p3"/>
+      <arc id="2358091315856" source="tau_1" target="p4"/>
+      <arc id="2358091313648" source="p4" target="Take in charge ticket"/>
+      <arc id="2358091314992" source="p3" target="Wait"/>
+      <arc id="2358091316240" source="p3" target="tau_1"/>
+      <arc id="2358091314608" source="Take in charge ticket" target="p5"/>
+      <arc id="2358091313360" source="Wait" target="p4"/>
+      <arc id="2358091314416" source="Resolve ticket" target="p0"/>
+      <arc id="2358091150576" source="Closed" target="p1"/>
+      <arc id="2358091150096" source="end_tau" target="sink"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

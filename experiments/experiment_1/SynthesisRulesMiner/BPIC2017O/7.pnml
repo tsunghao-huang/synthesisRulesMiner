@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="n0">
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p0">
+        <name>
+          <text>p0</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <transition id="end_tau">
+        <name>
+          <text>end_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="1ca48439-f805-460b-971c-cc1db03fb29a"/>
+      </transition>
+      <transition id="O_Sent (online only)">
+        <name>
+          <text>O_Sent (online only)</text>
+        </name>
+      </transition>
+      <transition id="tau_0">
+        <name>
+          <text>tau_0</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="da3ef742-9202-47f3-8501-b320c967b466"/>
+      </transition>
+      <transition id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="start_tau">
+        <name>
+          <text>start_tau</text>
+        </name>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="b4c28f25-168e-42b5-916b-f0b890ec30fa"/>
+      </transition>
+      <transition id="O_Sent (mail and online)">
+        <name>
+          <text>O_Sent (mail and online)</text>
+        </name>
+      </transition>
+      <transition id="O_Accepted">
+        <name>
+          <text>O_Accepted</text>
+        </name>
+      </transition>
+      <transition id="O_Cancelled">
+        <name>
+          <text>O_Cancelled</text>
+        </name>
+      </transition>
+      <transition id="O_Refused">
+        <name>
+          <text>O_Refused</text>
+        </name>
+      </transition>
+      <transition id="O_Returned">
+        <name>
+          <text>O_Returned</text>
+        </name>
+      </transition>
+      <arc id="2358091868048" source="O_Cancelled" target="p0"/>
+      <arc id="2358091885584" source="source" target="start_tau"/>
+      <arc id="2358091869968" source="O_Sent (mail and online)" target="p2"/>
+      <arc id="2358091867664" source="p1" target="end_tau"/>
+      <arc id="2358091867808" source="tau_0" target="p0"/>
+      <arc id="2358091866800" source="O_Sent (online only)" target="p2"/>
+      <arc id="2358091867952" source="p2" target="O_Cancelled"/>
+      <arc id="2358091868720" source="O_Returned" target="p4"/>
+      <arc id="2358091868336" source="O_Accepted" target="p0"/>
+      <arc id="2358091867712" source="End" target="p1"/>
+      <arc id="2358091868864" source="p4" target="tau_0"/>
+      <arc id="2358091868624" source="O_Refused" target="p0"/>
+      <arc id="2358091882704" source="p3" target="O_Sent (online only)"/>
+      <arc id="2358091868240" source="p4" target="O_Accepted"/>
+      <arc id="2358091868768" source="p2" target="O_Returned"/>
+      <arc id="2358091867616" source="end_tau" target="sink"/>
+      <arc id="2358091885536" source="start_tau" target="p3"/>
+      <arc id="2358091869920" source="p3" target="O_Sent (mail and online)"/>
+      <arc id="2358091867760" source="p0" target="End"/>
+      <arc id="2358091868528" source="p4" target="O_Refused"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>
