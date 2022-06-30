@@ -174,8 +174,6 @@ def get_freq_order(log, exp=False):
         uniq_a_sorted.insert(0,end_name)
     return uniq_a_sorted
 
-# log = xes_importer.apply('C:/Users/huang/Desktop/test.xes')
-
 # order = get_bf_order(log, from_start=False, from_end=True, noise_threshold=0)
 # print(order)
 
