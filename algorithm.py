@@ -17,6 +17,10 @@ def apply(log, order_type='bfs', theta=0.95, c=0.9, use_recall=False,
         uniq_a_sorted = get_bf_order(log=log, from_start=True, exp=exp)
     elif order_type == 'freq':
         uniq_a_sorted = get_freq_order(log, exp=exp)
+    elif order_type == 'dfs':
+        uniq_a_sorted = get_dfs_order(log)
+    elif order_type =='dfs_start':
+        uniq_a_sorted = get_dfs_order(log, from_end=False)
 
     activity_name_log = [[a['concept:name'] for a in trace] for trace in log]
 

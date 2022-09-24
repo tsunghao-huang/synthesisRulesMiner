@@ -174,12 +174,135 @@ def get_freq_order(log, exp=False):
         uniq_a_sorted.insert(0,end_name)
     return uniq_a_sorted
 
-# order = get_bf_order(log, from_start=False, from_end=True, noise_threshold=0)
-# print(order)
+def get_dfs_order(log, from_end=True):
+    
+    def get_init_order(log, uniq_a, uniq_a_count, where='start'):
 
-# order = get_freq_order(log)
+        uniq_a_count_dict = uniq_a_count_dict = {uniq_a[i]:c for i, c in enumerate(uniq_a_count)}
 
-# print(order)
+        if where == 'start':
+            init_activities = [[a['concept:name'] for a in trace][0] for trace in log]
+        elif where == 'end':
+            init_activities = [[a['concept:name'] for a in trace][-1] for trace in log]
+
+        uniq_init_a, uniq_init_a_edge_weights = np.unique(init_activities, return_counts=True)
+        init_nodes = np.array([(node_name, uniq_init_a_edge_weights[i], uniq_a_count_dict[node_name]) 
+                               for i, node_name in enumerate(uniq_init_a)], 
+                              dtype=[('node_name', 'object'), ('weight', 'int'), ('node_freq', 'int')])
+
+        init_nodes_order_inds = np.flip(np.argsort(init_nodes, order=['weight', 'node_freq']))  
+        ordered_init_nodes = init_nodes[init_nodes_order_inds]      
+        ordered_init_nodes = [node[0] for node in ordered_init_nodes]
+
+        return ordered_init_nodes
+            
+        
+    def get_ordered_neighbor_nodes(activity_name:str, dfg, uniq_a, uniq_a_count, 
+                                   direction='target'):
+        
+        
+        uniq_a_ind_dict = {node:ind for ind, node in enumerate(uniq_a)}
+        
+        if direction == 'target':
+            neighbor_nodes = np.array([(r[1], v, uniq_a_count[uniq_a_ind_dict[r[1]]]) 
+                                     for r, v in dfg.items() if r[0] == activity_name and r[1] != activity_name], 
+                                    dtype=[('node_name', 'object'), ('weight', 'int'), ('node_freq', 'int')])
+            
+        elif direction == 'source':
+            neighbor_nodes = np.array([(r[0], v, uniq_a_count[uniq_a_ind_dict[r[0]]]) 
+                                     for r, v in dfg.items() if r[1] == activity_name and r[0] != activity_name], 
+                                    dtype=[('node_name', 'object'), ('weight', 'int'), ('node_freq', 'int')])            
+        
+        neighbor_nodes_order_inds = np.flip(np.argsort(neighbor_nodes, order=['weight', 'node_freq']))  
+        ordered_neighbor_nodes = neighbor_nodes[neighbor_nodes_order_inds]      
+        ordered_neighbor_nodes = [node[0] for node in ordered_neighbor_nodes]
+                
+        return ordered_neighbor_nodes
+    
+    def filter_dfg(dfg_dict, noise_threshold=0.2):
+        
+        # filter out going arcs
+        threshold_dict = {a:max([v for k, v in dfg_dict.items() if k[0] == a])*noise_threshold 
+                          for a in set([k[0] for k in dfg_dict])}
+        filtered_dfg_dict = {k:v for k, v in dfg_dict.items() if v >= threshold_dict[k[0]]}
+
+        # print(filtered_dfg_dict)
+#         # filter incoming arcs
+#         threshold_dict = {a:max([v for k, v in dfg_dict.items() if k[1] == a])*noise_threshold 
+#                           for a in set([k[1] for k in dfg_dict])}
+
+#         filtered_dfg_dict = {k:v for k, v in filtered_dfg_dict.items() if v >= threshold_dict[k[1]]}
+
+        return filtered_dfg_dict
+
+    
+    unrolled_log = [a['concept:name'] for trace in log for a in trace]
+    uniq_a, uniq_a_count = np.unique(unrolled_log, return_counts=True)
+    uniq_a_sorted = np.flip(uniq_a[np.argsort(uniq_a_count)])
+    n_a = len(uniq_a_sorted)
+
+    dfg = dfg_inst.apply(log)
+    
+
+    if from_end:
+
+        # get order from end activities
+        order_from_end_a = []
+        a_tb_explored = get_init_order(log, uniq_a, uniq_a_count, where='end')
+        dfg_dict = {k:v for k, v in dfg.items()}
+        # dfg_dict = filter_dfg(dfg_dict, noise_threshold=noise_threshold)
+
+        gamma = [a_tb_explored[0]]
+        stack = a_tb_explored.copy()[1:]
+        A = set(uniq_a)
+
+        while len(A) != len(gamma):
+            A_prime = A.difference(set(gamma))
+            gamma_prime = get_ordered_neighbor_nodes(gamma[-1], dfg_dict, uniq_a, uniq_a_count, direction='source')
+            gamma_prime = [a for a in gamma_prime if a in A_prime]
+
+            if len(gamma_prime) == 0:
+                gamma.append(stack[0])
+            else:
+                gamma.append(gamma_prime[0])
+            
+            gamma_prime = [a for a in gamma_prime[1:] if a not in stack]
+            stack = gamma_prime + stack
+
+            stack = [s for s in stack if s in A.difference(set(gamma))]
+
+    else:
+
+        # get order from start activities
+        order_from_start_a = []
+        a_tb_explored = get_init_order(log, uniq_a, uniq_a_count, where='start')
+        dfg_dict = {k:v for k, v in dfg.items()}
+        # dfg_dict = filter_dfg(dfg_dict, noise_threshold=noise_threshold)
+
+        gamma = [a_tb_explored[0]]
+        stack = a_tb_explored.copy()[1:]
+        A = set(uniq_a)
+
+        while len(A) != len(gamma):
+            A_prime = A.difference(set(gamma))
+            gamma_prime = get_ordered_neighbor_nodes(gamma[-1], dfg_dict, uniq_a, uniq_a_count, direction='target')
+            gamma_prime = [a for a in gamma_prime if a in A_prime]
+
+            if len(gamma_prime) == 0:
+                gamma.append(stack[0])
+            else:
+                gamma.append(gamma_prime[0])
+            
+            gamma_prime = [a for a in gamma_prime[1:] if a not in stack]
+            stack = gamma_prime + stack
+
+            stack = [s for s in stack if s in A.difference(set(gamma))]
+        
+        end_name = [a['concept:name'] for a in log[0]][-1]
+        gamma.remove(end_name)
+        gamma.insert(0,end_name)
+    
+    return gamma
 
 def remove_tran_by_name(net, trans_name='short_circuit'):
     """
@@ -504,8 +627,9 @@ def get_new_nodes_gen_by_LD_rules(incidence_mat, source_ind:int, sink_ind:int,
         elif node_type == 'p':
             new_mat = np.concatenate((incidence_mat, cand_vector.reshape(1, -1)), axis=0)
             if check_sound:
-                mat_tb_checked_sound = np.delete(new_mat, obj=short_circuit_ind, axis=1)
-                if is_fc_net_from_mat(new_mat) and is_sound_from_mat_by_woflan(mat_tb_checked_sound):
+                # mat_tb_checked_sound = np.delete(new_mat, obj=short_circuit_ind, axis=1)
+                # if is_fc_net_from_mat(new_mat) and is_sound_from_mat_by_woflan(mat_tb_checked_sound):
+                if is_fc_net_from_mat(new_mat):
                     _, inds = sympy.Matrix(new_mat).T.rref()
                     include_in_final = ((new_mat.shape[0] - 1) not in inds)
 #                 if is_fc_net_from_mat(new_mat):
@@ -1583,10 +1707,16 @@ def get_the_best_net(net, new_t_name, log, theta=0.9, visualize=False,
             pn_visualizer.view(gviz)
             print(net_dict['rule'])        
 
-        fitness_dict = replay_fitness_evaluator.apply(log, break_sc_petri, im, fm, 
-                                                      variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)
-
-
+        try:
+            fitness_dict = replay_fitness_evaluator.apply(log, break_sc_petri, im, fm, 
+                                                            variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)
+        except Exception:
+            fitness_dict = {'percFitTraces': 0,
+                            'averageFitness': 0,
+                            'percentage_of_fitting_traces': 0,
+                            'average_trace_fitness': 0,    
+                            'log_fitness': 0}
+            pass
         net_dict['fitness_dict'] = fitness_dict
         recall = fitness_dict['percentage_of_fitting_traces']/100
         net_dict['recall'] = recall
